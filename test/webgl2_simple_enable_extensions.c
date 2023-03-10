@@ -61,6 +61,9 @@ int main()
   if (hasext(exts, "WEBGL_multi_draw_instanced_base_vertex_base_instance"))
     assert(emscripten_webgl_enable_WEBGL_multi_draw_instanced_base_vertex_base_instance(context));
 
+  if (hasext(exts, "ANGLE_shader_pixel_local_storage"))
+    assert(emscripten_webgl_enable_ANGLE_shader_pixel_local_storage(context));
+
 #if WEBGL_SIMPLE_ENABLE_EXTENSION
   assert(hasext(exts, "ANGLE_instanced_arrays") == emscripten_webgl_enable_extension(context, "ANGLE_instanced_arrays"));
   assert(hasext(exts, "OES_vertex_array_object") == emscripten_webgl_enable_extension(context, "OES_vertex_array_object"));
@@ -68,6 +71,7 @@ int main()
   assert(hasext(exts, "WEBGL_draw_instanced_base_vertex_base_instance") == emscripten_webgl_enable_extension(context, "WEBGL_draw_instanced_base_vertex_base_instance"));
   assert(hasext(exts, "WEBGL_multi_draw") == emscripten_webgl_enable_extension(context, "WEBGL_multi_draw"));
   assert(hasext(exts, "WEBGL_multi_draw_instanced_base_vertex_base_instance") == emscripten_webgl_enable_extension(context, "WEBGL_multi_draw_instanced_base_vertex_base_instance"));
+  assert(hasext(exts, "ANGLE_shader_pixel_local_storage") == emscripten_webgl_enable_extension(context, "ANGLE_shader_pixel_local_storage"));
 #endif
 
   return 0;

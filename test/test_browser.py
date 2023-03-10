@@ -4464,6 +4464,15 @@ Module["preRun"].push(function () {
                          '-DEXPLICIT_SWAP=1',
                          '-DWEBGL_CONTEXT_VERSION=2'])
 
+  # Tests for ANGLE_shader_pixel_local_storage
+  # For testing WebGL draft extensions like this, if using chrome as the browser,
+  # We might want to append the --enable-webgl-draft-extensions to the EMTEST_BROWSER env arg.
+  @requires_graphics_hardware
+  def test_angle_shader_pixel_local_storage(self):
+    self.btest('angle_shader_pixel_local_storage_test.c',
+               reference='angle_shader_pixel_local_storage.png',
+               args=['-lGL', '-sMAX_WEBGL_VERSION=2', '-sMIN_WEBGL_VERSION=2'])
+
   @requires_graphics_hardware
   def test_webgl_sample_query(self):
     cmd = ['-sMAX_WEBGL_VERSION=2', '-lGL']

@@ -1114,6 +1114,122 @@ var LibraryWebGL2 = {
   glRenderbufferStorageMultisample__sig: 'viiiii',
   glCopyTexSubImage3D__sig: 'viiiiiiiii',
   glClearBufferfi__sig: 'viifi',
+
+  glFramebufferTexturePixelLocalStorageWEBGL__sig: 'viiii',
+  glFramebufferTexturePixelLocalStorageWEBGL: function(plane, backingtexture, level, layer) {
+#if GL_ASSERTIONS
+    assert(GLctx.pls && GLctx.pls['framebufferTexturePixelLocalStorageWEBGL'],
+           'WEBGL_shader_pixel_local_storage extension not enabled');
+#endif
+    GLctx.pls['framebufferTexturePixelLocalStorageWEBGL'](plane, GL.textures[backingtexture], level, layer);
+  },
+
+  glFramebufferPixelLocalClearValuefvWEBGL__sig: 'vii',
+  glFramebufferPixelLocalClearValuefvWEBGL: function(plane, value) {
+#if GL_ASSERTIONS
+    assert(GLctx.pls && GLctx.pls['framebufferPixelLocalClearValuefvWEBGL'],
+           'WEBGL_shader_pixel_local_storage extension not enabled');
+#endif
+#if GL_ASSERTIONS
+    assert((value & 3) == 0,
+           'Pointer to float data passed to glFramebufferPixelLocalClearValuefvWEBGL must be aligned to four bytes!');
+#endif
+    GLctx.pls['framebufferPixelLocalClearValuefvWEBGL'](plane, HEAPF32, value >> 2);
+  },
+
+  glFramebufferPixelLocalClearValueivWEBGL__sig: 'vii',
+  glFramebufferPixelLocalClearValueivWEBGL: function(plane, value) {
+#if GL_ASSERTIONS
+    assert(GLctx.pls && GLctx.pls['framebufferPixelLocalClearValueivWEBGL'],
+           'WEBGL_shader_pixel_local_storage extension not enabled');
+#endif
+#if GL_ASSERTIONS
+    assert((value & 3) == 0,
+           'Pointer to float data passed to glFramebufferPixelLocalClearValueivWEBGL must be aligned to four bytes!');
+#endif
+    GLctx.pls['framebufferPixelLocalClearValueivWEBGL'](plane, HEAP32, value >> 2);
+  },
+
+  glFramebufferPixelLocalClearValueuivWEBGL__sig: 'vii',
+  glFramebufferPixelLocalClearValueuivWEBGL: function(plane, value) {
+#if GL_ASSERTIONS
+    assert(GLctx.pls && GLctx.pls['framebufferPixelLocalClearValueuivWEBGL'],
+           'WEBGL_shader_pixel_local_storage extension not enabled');
+#endif
+#if GL_ASSERTIONS
+    assert((value & 3) == 0,
+           'Pointer to float data passed to glFramebufferPixelLocalClearValueuivWEBGL must be aligned to four bytes!');
+#endif
+    GLctx.pls['framebufferPixelLocalClearValueuivWEBGL'](plane, HEAPU32, value >> 2);
+  },
+
+  glBeginPixelLocalStorageWEBGL__deps: ['$tempFixedLengthArray'],
+  glBeginPixelLocalStorageWEBGL__sig: 'vii',
+  glBeginPixelLocalStorageWEBGL: function(n, loadops) {
+#if GL_ASSERTIONS
+    assert(GLctx.pls && GLctx.pls['beginPixelLocalStorageWEBGL'],
+           'WEBGL_shader_pixel_local_storage extension not enabled');
+#endif
+#if GL_ASSERTIONS
+    assert(n < tempFixedLengthArray.length,
+           'Unsupported count of numPlanes=' + n + ' passed to glBeginPixelLocalStorageWEBGL');
+#endif
+    var loadopsArray = tempFixedLengthArray[n];
+    for (var i = 0; i < n; i++) {
+      loadopsArray[i] = {{{ makeGetValue('loadops', 'i*4', 'i32') }}};
+    }
+    GLctx.pls['beginPixelLocalStorageWEBGL'](loadopsArray);
+  },
+
+  glEndPixelLocalStorageWEBGL__deps: ['$tempFixedLengthArray'],
+  glEndPixelLocalStorageWEBGL__sig: 'vii',
+  glEndPixelLocalStorageWEBGL: function(n, storeops) {
+#if GL_ASSERTIONS
+    assert(GLctx.pls && GLctx.pls['endPixelLocalStorageWEBGL'],
+           'WEBGL_shader_pixel_local_storage extension not enabled');
+#endif
+#if GL_ASSERTIONS
+    assert(n < tempFixedLengthArray.length,
+           'Unsupported count of numPlanes=' + n + ' passed to glEndPixelLocalStorageWEBGL');
+#endif
+    var storeopsArray = tempFixedLengthArray[n];
+    for (var i = 0; i < n; i++) {
+      storeopsArray[i] = {{{ makeGetValue('storeops', 'i*4', 'i32') }}};
+    }
+    GLctx.pls['endPixelLocalStorageWEBGL'](storeopsArray);
+  },
+
+  glPixelLocalStorageBarrierWEBGL__sig: 'vii',
+  glPixelLocalStorageBarrierWEBGL: function(n, storeops) {
+#if GL_ASSERTIONS
+    assert(GLctx.pls && GLctx.pls['pixelLocalStorageBarrierWEBGL'],
+           'WEBGL_shader_pixel_local_storage extension not enabled');
+#endif
+    var storeopsArray = tempFixedLengthArray[n];
+    for (var i = 0; i < n; i++) {
+      storeopsArray[i] = {{{ makeGetValue('storeops', 'i*4', 'i32') }}};
+    }
+    GLctx.pls['pixelLocalStorageBarrierWEBGL'](storeopsArray);
+  },
+
+  emscripten_webgl_shader_pixel_local_storage_is_coherent__sig: 'i',
+  emscripten_webgl_shader_pixel_local_storage_is_coherent: function() {
+#if GL_ASSERTIONS
+    assert(GLctx.pls && GLctx.pls['isCoherent'],
+           'WEBGL_shader_pixel_local_storage extension not enabled');
+#endif
+    return GLctx.pls['isCoherent']();
+  },
+
+  _webgl_enable_WEBGL_shader_pixel_local_storage: function(ctx) {
+    // Closure is expected to be allowed to minify the '.pls' property, so not accessing it quoted.
+    return !!(ctx.pls = ctx.getExtension('WEBGL_shader_pixel_local_storage'));
+  },
+
+  emscripten_webgl_enable_WEBGL_shader_pixel_local_storage__deps: ['_webgl_enable_WEBGL_shader_pixel_local_storage'],
+  emscripten_webgl_enable_WEBGL_shader_pixel_local_storage: function(ctx) {
+    return __webgl_enable_WEBGL_shader_pixel_local_storage(GL.contexts[ctx].GLctx);
+  },
 };
 
 // Simple pass-through functions. Starred ones have return values. [X] ones have X in the C name but not in the JS name

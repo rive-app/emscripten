@@ -72,6 +72,10 @@ EM_BOOL emscripten_webgl_enable_WEBGL_multi_draw(EMSCRIPTEN_WEBGL_CONTEXT_HANDLE
 
 EM_BOOL emscripten_webgl_enable_WEBGL_multi_draw_instanced_base_vertex_base_instance(EMSCRIPTEN_WEBGL_CONTEXT_HANDLE context);
 
+EM_BOOL emscripten_webgl_enable_WEBGL_shader_pixel_local_storage(EMSCRIPTEN_WEBGL_CONTEXT_HANDLE context);
+
+EM_BOOL emscripten_webgl_shader_pixel_local_storage_is_coherent();
+
 typedef EM_BOOL (*em_webgl_context_callback)(int eventType, const void *reserved, void *userData);
 EMSCRIPTEN_RESULT emscripten_set_webglcontextlost_callback_on_thread(const char *target __attribute__((nonnull)), void *userData, EM_BOOL useCapture, em_webgl_context_callback callback, pthread_t targetThread);
 EMSCRIPTEN_RESULT emscripten_set_webglcontextrestored_callback_on_thread(const char *target __attribute__((nonnull)), void *userData, EM_BOOL useCapture, em_webgl_context_callback callback, pthread_t targetThread);

@@ -161,6 +161,7 @@ var LibraryGL = {
 #if MAX_WEBGL_VERSION >= 2
     '_webgl_enable_WEBGL_draw_instanced_base_vertex_base_instance',
     '_webgl_enable_WEBGL_multi_draw_instanced_base_vertex_base_instance',
+    '_webgl_enable_WEBGL_shader_pixel_local_storage',
 #endif
     '_webgl_enable_WEBGL_multi_draw',
     ],
@@ -1107,6 +1108,7 @@ var LibraryGL = {
       // Extensions that are available from WebGL >= 2 (no-op if called on a WebGL 1 context active)
       __webgl_enable_WEBGL_draw_instanced_base_vertex_base_instance(GLctx);
       __webgl_enable_WEBGL_multi_draw_instanced_base_vertex_base_instance(GLctx);
+      __webgl_enable_WEBGL_shader_pixel_local_storage(GLctx);
 #endif
 
 #if MAX_WEBGL_VERSION >= 2

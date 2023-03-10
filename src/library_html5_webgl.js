@@ -346,6 +346,7 @@ var LibraryHtml5WebGL = {
 #if MAX_WEBGL_VERSION >= 2
     '_webgl_enable_WEBGL_draw_instanced_base_vertex_base_instance',
     '_webgl_enable_WEBGL_multi_draw_instanced_base_vertex_base_instance',
+    '_webgl_enable_WEBGL_shader_pixel_local_storage',
 #endif
     '_webgl_enable_WEBGL_multi_draw',
 #endif
@@ -373,6 +374,7 @@ var LibraryHtml5WebGL = {
 #if MAX_WEBGL_VERSION >= 2
     if (extString == 'WEBGL_draw_instanced_base_vertex_base_instance') __webgl_enable_WEBGL_draw_instanced_base_vertex_base_instance(GLctx);
     if (extString == 'WEBGL_multi_draw_instanced_base_vertex_base_instance') __webgl_enable_WEBGL_multi_draw_instanced_base_vertex_base_instance(GLctx);
+    if (extString == 'WEBGL_shader_pixel_local_storage') __webgl_enable_WEBGL_shader_pixel_local_storage(GLctx);
 #endif
 
     if (extString == 'WEBGL_multi_draw') __webgl_enable_WEBGL_multi_draw(GLctx);
@@ -385,7 +387,8 @@ var LibraryHtml5WebGL = {
          'WEBGL_draw_buffers',
          'WEBGL_multi_draw',
          'WEBGL_draw_instanced_base_vertex_base_instance',
-         'WEBGL_multi_draw_instanced_base_vertex_base_instance'].includes(extString)) {
+         'WEBGL_multi_draw_instanced_base_vertex_base_instance',
+         'WEBGL_shader_pixel_local_storage'].includes(extString)) {
       err('When building with -sGL_SUPPORT_SIMPLE_ENABLE_EXTENSIONS=0, function emscripten_webgl_enable_extension() cannot be used to enable extension '
                     + extString + '! Use one of the functions emscripten_webgl_enable_*() to enable it!');
     }
